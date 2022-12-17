@@ -1,11 +1,11 @@
 const express=require("express");
+const cors=require("cors");
+
 const { appLevelMiddleware,appLevelMiddleware2, routeLevel1 ,routeLevel2, routeController} = require("./middleware");
 const app=express();
-require("dotenv").config()
-
 //app.use(appLevelMiddleware)
 // App levelmiddleware
-
+app.use(cors());
 app.use(express.json());  // actually parses your json data
 //app.use(appLevelMiddleware)
 //app.use(appLevelMiddleware2)
@@ -24,13 +24,10 @@ app.get("/api",function(req,res,next){
 })
 */
 
-
-app.get("*",function(req,res,next){
-
-    res.sendFile(__dirname+"/dist/index.html");
-
-
-
+app.get("/api",function(req,res){
+    res.json({
+        msg:"Success From The Api HEre"
+    })
 })
 
 
@@ -43,10 +40,8 @@ app.get("*",function(req,res,next){
 
 
 
-const port=process.env.PORT || 8090;
-
-app.listen(port,()=>{
-    console.log("Server Started at port "+8090);
+app.listen(8080,()=>{
+    console.log("Server Started at port "+8080);
 })
 
 // Types of middleware
